@@ -1,8 +1,5 @@
 use bevy_egui::egui;
-use nalgebra::{
-    storage::StorageMut, Complex, Dim, Isometry, Matrix, Quaternion, SVector, Scalar, Translation,
-    Unit,
-};
+use bevy_rapier2d::na::*;
 
 use crate::Inspectable;
 
@@ -95,6 +92,19 @@ impl Inspectable for Unit<Complex<f32>> {
         changed
     }
 }
+
+// impl Inspectable for UnitComplex<f32> {
+//     type Attributes = ();
+
+//     fn ui(&mut self, ui: &mut egui::Ui, _: Self::Attributes, _: &crate::Context) -> bool {
+//         let mut angle = self.angle();
+//         let changed = ui.drag_angle_tau(&mut angle).changed();
+//         if changed {
+//             *self = UnitComplex::<f32>::from_angle(angle);
+//         }
+//         changed
+//     }
+// }
 
 impl<T: Inspectable + Scalar, R: Inspectable, const D: usize> Inspectable for Isometry<T, R, D> {
     type Attributes = ();
